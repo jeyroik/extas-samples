@@ -1,0 +1,13 @@
+{
+  "name": "jeyroik/extas-samples",
+  "description": "Extas samples package",
+  "require": {
+    "jeyroik/extas-installer": "*",
+    "jeyroik/extas-base": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "extas\\": "src/"
+    }
+  }
+}

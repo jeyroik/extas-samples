@@ -42,12 +42,22 @@ interface IHasSampleParameters
     public function getParameter(string $parameterName): ?ISampleParameter;
 
     /**
+     * Return a parameter options, throw exception if parameter is missed.
+     *
+     * @param string $parameterName
+     * @return array
+     * @throws \Exception
+     */
+    public function getParameterOptions(string $parameterName): array;
+
+    /**
      * Return a parameter value.
      *
      * @param string $parameterName
+     * @param mixed $default
      * @return mixed
      */
-    public function getParameterValue(string $parameterName);
+    public function getParameterValue(string $parameterName, $default = null);
 
     /**
      * Check if parameter with the name $parameterName is exist.
@@ -66,13 +76,25 @@ interface IHasSampleParameters
     public function setParameters(array $parameters);
 
     /**
+     * @param array $parametersOptions
+     * @return $this
+     */
+    public function setParametersOptions(array $parametersOptions);
+
+    /**
      * Add parameters to a parameters list.
      * Skip parameter if it already exists.
      *
-     * @param array $parameters
+     * @param ISampleParameter[] $parameters
      * @return $this
      */
     public function addParameters(array $parameters);
+
+    /**
+     * @param array $parametersOptions
+     * @return $this
+     */
+    public function addParametersOptions(array $parametersOptions);
 
     /**
      * Rewrite a parameter.
@@ -87,7 +109,7 @@ interface IHasSampleParameters
     /**
      * @param string $parameterName
      * @param mixed $value
-     * @return mixed
+     * @return $this
      */
     public function setParameterValue(string $parameterName, $value);
 
@@ -97,7 +119,7 @@ interface IHasSampleParameters
      *
      * @param string $parameterName
      * @param array $options
-     * @return mixed
+     * @return $this
      * @throws \Exception
      */
     public function updateParameter(string $parameterName, array $options);
