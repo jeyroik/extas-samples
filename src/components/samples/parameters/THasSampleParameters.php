@@ -159,6 +159,22 @@ trait THasSampleParameters
     }
 
     /**
+     * @param array $parametersValues
+     * @return $this
+     * @throws \Exception
+     */
+    public function setParametersValues(array $parametersValues)
+    {
+        foreach ($parametersValues as $paramName => $paramValue) {
+            if ($this->hasParameter($paramName)) {
+                $this->setParameterValue($paramName, $paramValue);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * Add parameters to a parameters list.
      * Skip parameter if it already exists.
      *

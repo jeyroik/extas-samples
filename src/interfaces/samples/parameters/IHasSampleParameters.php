@@ -82,6 +82,12 @@ interface IHasSampleParameters
     public function setParametersOptions(array $parametersOptions);
 
     /**
+     * @param array $parametersValues
+     * @return $this
+     */
+    public function setParametersValues(array $parametersValues);
+
+    /**
      * Add parameters to a parameters list.
      * Skip parameter if it already exists.
      *
