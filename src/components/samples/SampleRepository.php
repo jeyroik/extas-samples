@@ -12,9 +12,9 @@ use extas\interfaces\samples\ISampleRepository;
  */
 class SampleRepository extends Repository implements ISampleRepository
 {
-    protected $scope = 'extas';
-    protected $name = 'samples';
-    protected $pk = Sample::FIELD__NAME;
-    protected $idAs = '';
-    protected $itemClass = Sample::class;
+    protected string $scope = 'extas';
+    protected string $name = 'samples';
+    protected string $pk = Sample::FIELD__NAME;
+    protected string $idAs = '';
+    protected string $itemClass = Sample::class;
 }

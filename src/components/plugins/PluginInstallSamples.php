@@ -12,9 +12,9 @@ use extas\interfaces\samples\ISampleRepository;
  */
 class PluginInstallSamples extends PluginInstallDefault
 {
-    protected $selfName = 'sample';
-    protected $selfSection = 'samples';
-    protected $selfUID = Sample::FIELD__NAME;
-    protected $selfItemClass = Sample::class;
-    protected $selfRepositoryClass = ISampleRepository::class;
+    protected string $selfName = 'sample';
+    protected string $selfSection = 'samples';
+    protected string $selfUID = Sample::FIELD__NAME;
+    protected string $selfItemClass = Sample::class;
+    protected string $selfRepositoryClass = ISampleRepository::class;
 }

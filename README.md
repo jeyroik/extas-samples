@@ -1,2 +1,3 @@
 # extas-samples
-Samples package for the extas
+
+Samples package for the extas.
