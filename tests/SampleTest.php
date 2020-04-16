@@ -36,7 +36,7 @@ class SampleTest extends TestCase
         ]);
 
         $this->assertTrue($sample->hasParameter('test1'));
-        $this->assertCount(2, count($sample->getParameters()));
+        $this->assertCount(2, $sample->getParameters());
 
         foreach ($sample->eachParameter() as $parameterName => $parameter) {
             $this->assertTrue(in_array($parameterName, ['test1', 'test2']));
