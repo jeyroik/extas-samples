@@ -209,6 +209,7 @@ trait THasSampleParameters
     {
         $parameters = $this->config[IHasSampleParameters::FIELD__PARAMETERS] ?? [];
         $parameters[$parameterName] = $options;
+        $this->config[IHasSampleParameters::FIELD__PARAMETERS] = $parameters;
 
         return $this;
     }
@@ -224,7 +225,8 @@ trait THasSampleParameters
         $parameter = $this->getParameter($parameterName);
         if ($parameter) {
             $parameter->setValue($value);
-            return $this->setParameter($parameterName, $parameter->__toArray());
+            $this->setParameter($parameterName, $parameter->__toArray());
+            return $this;
         } else {
             throw new \Exception('Unknown parameter "' . $parameterName . '"');
         }
