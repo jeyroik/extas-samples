@@ -82,8 +82,7 @@ class SampleTest extends TestCase
         $this->assertEquals(
             [
                 'test1' => 'test1-v',
-                'test1*' => '*',
-                'test2*' => 'test2-v'
+                'test1*' => '*'
             ],
             $sample->getParametersValues()
         );
@@ -94,8 +93,7 @@ class SampleTest extends TestCase
         $this->assertEquals(
             [
                 'test1' => '1',
-                'test1*' => '2',
-                'test2*' => 'test2-v'
+                'test1*' => '2'
             ],
             $sample->getParametersValues()
         );
