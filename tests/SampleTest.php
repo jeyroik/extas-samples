@@ -9,6 +9,7 @@ use extas\components\samples\parameters\SampleParameter;
 use extas\interfaces\samples\ISampleRepository;
 use extas\components\samples\SampleRepository;
 use extas\components\SystemContainer;
+use extas\interfaces\repositories\IRepository;
 
 /**
  * Class SampleTest
