@@ -6,6 +6,9 @@ use extas\components\samples\THasSample;
 use extas\interfaces\samples\IHasSample;
 use extas\interfaces\samples\parameters\ISampleParameter;
 use extas\components\samples\parameters\SampleParameter;
+use extas\interfaces\samples\ISampleRepository;
+use extas\components\samples\SampleRepository;
+use extas\components\SystemContainer;
 
 /**
  * Class SampleTest
@@ -14,11 +17,21 @@ use extas\components\samples\parameters\SampleParameter;
  */
 class SampleTest extends TestCase
 {
+    /**
+     * @var IRepository|null
+     */
+    protected ?IRepository $sampleRepo = null;
+
     protected function setUp(): void
     {
         parent::setUp();
         $env = \Dotenv\Dotenv::create(getcwd() . '/tests/');
         $env->load();
+        $this->sampleRepo = new SampleRepository();
+        SystemContainer::addItem(
+            ISampleRepository::class,
+            SampleRepository::class
+        );
     }
 
     public function testParameters()
@@ -170,5 +183,13 @@ class SampleTest extends TestCase
         };
         $hasSample->setSampleName('test');
         $this->assertEquals('test', $hasSample->getSampleName());
+        $this->sampleRepo->create(new Sample([
+            Sample::FIELD__NAME => 'test',
+            Sample::FIELD__TITLE => 'This is test'
+        ]));
+        $sample = $hasSample->getSample();
+        $this->assertNotEmpty($sample);
+        $this->assertEquals('This is test', $sample->getTitle());
+        $this->sampleRepo->delete([Sample::FIELD__NAME => 'test']);
     }
 }
