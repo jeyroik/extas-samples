@@ -5,6 +5,7 @@ use extas\components\Item;
 use extas\components\samples\THasSample;
 use extas\interfaces\samples\IHasSample;
 use extas\interfaces\samples\parameters\ISampleParameter;
+use extas\components\samples\parameters\SampleParameter;
 
 /**
  * Class SampleTest
@@ -109,8 +110,45 @@ class SampleTest extends TestCase
         $sample->updateParameter('test1', [ISampleParameter::FIELD__VALUE => 'test1-v']);
         $this->assertEquals('test1-v', $sample->getParameterValue('test1'));
 
+        $sample->addParameters([
+            new SampleParameter([
+                SampleParameter::FIELD__NAME => 'test3',
+                SampleParameter::FIELD__VALUE => 'test3-v'
+            ])
+        ]);
+
+        $this->assertTrue($sample->hasParameter('test3'));
+
         $this->expectExceptionMessage('Unknown parameter "unknown"');
         $sample->getParameterOptions('unknown');
+    }
+
+    public function testAddNotASampleParameter()
+    {
+        $sample = new Sample();
+        $this->expectExceptionMessage('Not an extas\\interfaces\\samples\\ISampleParameter');
+        $sample->addParameters([
+            [
+                ISampleParameter::FIELD__NAME => 'not an object'
+            ]
+        ]);
+    }
+
+    public function testAddAlreadyExistedSampleParameter()
+    {
+        $sample = new Sample([
+            Sample::FIELD__PARAMETERS => [
+                'test' => [
+                    ISampleParameter::FIELD__NAME => 'test'
+                ]
+            ]
+        ]);
+        $this->expectExceptionMessage('Parameter "test" already exists');
+        $sample->addParameters([
+            new SampleParameter([
+                ISampleParameter::FIELD__NAME => 'test'
+            ])
+        ]);
     }
 
     public function testSetValueUnknownParameter()

@@ -180,14 +180,19 @@ trait THasSampleParameters
      *
      * @param array $parameters
      * @return $this
+     * @throws \Exception
      */
     public function addParameters(array $parameters)
     {
         $parametersData = $this->config[IHasSampleParameters::FIELD__PARAMETERS] ?? [];
 
         foreach ($parameters as $parameter) {
-            if (!($parameter instanceof ISampleParameter) || (isset($parametersData[$parameter->getName()]))) {
-                continue;
+            if (!$parameter instanceof ISampleParameter) {
+                throw new \Exception('Not an extas\\interfaces\\samples\\ISampleParameter');
+            }
+
+            if (isset($parametersData[$parameter->getName()])) {
+                throw new \Exception('Parameter "' . $parameter->getName() . '" already exists');
             }
             $parametersData[$parameter->getName()] = $parameter->__toArray();
         }
