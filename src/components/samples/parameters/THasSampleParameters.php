@@ -198,29 +198,6 @@ trait THasSampleParameters
     }
 
     /**
-     * @param array $parametersOptions
-     * @return $this
-     */
-    public function addParametersOptions(array $parametersOptions)
-    {
-        $parametersData = $this->config[IHasSampleParameters::FIELD__PARAMETERS] ?? [];
-
-        foreach ($parametersOptions as $parameter) {
-            if (!is_array($parameter) ||
-                !isset($parameter[ISampleParameter::FIELD__NAME]) ||
-                (isset($parametersData[$parameter[ISampleParameter::FIELD__NAME]]))
-            ) {
-                continue;
-            }
-            $parametersData[$parameter[ISampleParameter::FIELD__NAME]] = $parameter;
-        }
-
-        $this->config[IHasSampleParameters::FIELD__PARAMETERS] = $parametersData;
-
-        return $this;
-    }
-
-    /**
      * Rewrite a parameter.
      * Add parameter if it doesn't exist.
      *

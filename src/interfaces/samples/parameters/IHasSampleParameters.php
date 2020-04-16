@@ -97,12 +97,6 @@ interface IHasSampleParameters
     public function addParameters(array $parameters);
 
     /**
-     * @param array $parametersOptions
-     * @return $this
-     */
-    public function addParametersOptions(array $parametersOptions);
-
-    /**
      * Rewrite a parameter.
      * Add parameter if it doesn't exist.
      *
