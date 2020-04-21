@@ -133,6 +133,28 @@ class SampleTest extends TestCase
 
         $this->assertTrue($sample->hasParameter('test3'));
 
+        $sample->addParameterByValue('test4', 'test4-v');
+        $this->assertTrue($sample->hasParameter('test4'));
+
+        $sample->addParametersByValues([
+            'test5' => 'test5-v'
+        ]);
+        $this->assertTrue($sample->hasParameter('test5'));
+
+        $sample->addParameterByOptions([
+            SampleParameter::FIELD__NAME => 'test6',
+            SampleParameter::FIELD__VALUE => 'test6-v'
+        ]);
+        $this->assertTrue($sample->hasParameter('test6'));
+
+        $sample->addParametersByOptions([
+            [
+                SampleParameter::FIELD__NAME => 'test7',
+                SampleParameter::FIELD__VALUE => 'test7-v'
+            ]
+        ]);
+        $this->assertTrue($sample->hasParameter('test7'));
+
         $this->expectExceptionMessage('Unknown parameter "unknown"');
         $sample->getParameterOptions('unknown');
     }

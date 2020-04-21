@@ -68,6 +68,19 @@ interface IHasSampleParameters
     public function hasParameter(string $parameterName): bool;
 
     /**
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function addParameterByValue(string $name, $value);
+
+    /**
+     * @param array $options
+     * @return $this
+     */
+    public function addParameterByOptions(array $options);
+
+    /**
      * Rewrite parameters list.
      *
      * @param ISampleParameter[] $parameters
@@ -86,6 +99,18 @@ interface IHasSampleParameters
      * @return $this
      */
     public function setParametersValues(array $parametersValues);
+
+    /**
+     * @param array $parametersValues
+     * @return $this
+     */
+    public function addParametersByValues(array $parametersValues);
+
+    /**
+     * @param array $parametersOptions
+     * @return $this
+     */
+    public function addParametersByOptions(array $parametersOptions);
 
     /**
      * Add parameters to a parameters list.

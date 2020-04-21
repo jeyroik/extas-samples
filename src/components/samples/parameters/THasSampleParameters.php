@@ -203,6 +203,65 @@ trait THasSampleParameters
     }
 
     /**
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function addParameterByValue(string $name, $value)
+    {
+        if (!$this->hasParameter($name)) {
+            $this->config[static::FIELD__PARAMETERS] = $this->config[static::FIELD__PARAMETERS] ?? [];
+            $this->config[static::FIELD__PARAMETERS][$name] = [
+                ISampleParameter::FIELD__NAME => $name,
+                ISampleParameter::FIELD__VALUE => $value
+            ];
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array $options
+     * @return $this
+     */
+    public function addParameterByOptions(array $options)
+    {
+        $name = $options[ISampleParameter::FIELD__NAME] ?? '';
+        if (!$this->hasParameter($name)) {
+            $this->config[static::FIELD__PARAMETERS] = $this->config[static::FIELD__PARAMETERS] ?? [];
+            $this->config[static::FIELD__PARAMETERS][$name] = $options;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array $parametersValues
+     * @return $this
+     */
+    public function addParametersByValues(array $parametersValues)
+    {
+        foreach ($parametersValues as $parameterName => $parameterValue) {
+            $this->addParameterByValue($parameterName, $parameterValue);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array $parametersOptions
+     * @return $this
+     */
+    public function addParametersByOptions(array $parametersOptions)
+    {
+        foreach ($parametersOptions as $parameterOptions) {
+            $this->addParameterByOptions($parameterOptions);
+        }
+
+        return $this;
+    }
+
+    /**
      * Rewrite a parameter.
      * Add parameter if it doesn't exist.
      *
