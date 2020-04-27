@@ -64,6 +64,8 @@ class SampleTest extends TestCase
             $this->assertTrue(in_array($value, ['test1-v', 'test2-v']));
         }
 
+        $this->assertEquals(['test1', 'test2'], $sample->getParametersNames());
+
         $param = $sample->getParameter('test1');
         $this->assertNotEmpty($param);
         $this->assertEquals(['test1', 'test1-v'], [$param->getName(), $param->getValue()]);

@@ -34,6 +34,11 @@ interface IHasSampleParameters
     public function getParametersValues();
 
     /**
+     * @return array
+     */
+    public function getParametersNames(): array;
+
+    /**
      * Return a parameter.
      *
      * @param string $parameterName

@@ -59,6 +59,16 @@ trait THasSampleParameters
     }
 
     /**
+     * @return array
+     */
+    public function getParametersNames(): array
+    {
+        $params = $this->config[static::FIELD__PARAMETERS] ?? [];
+
+        return array_keys($params);
+    }
+
+    /**
      * Return a parameter.
      *
      * @param string $parameterName
