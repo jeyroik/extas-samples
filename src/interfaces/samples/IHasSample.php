@@ -26,4 +26,10 @@ interface IHasSample
      * @return mixed
      */
     public function setSampleName(string $name);
+
+    /**
+     * @param ISample $sample
+     * @return $this
+     */
+    public function buildFromSample(ISample $sample);
 }

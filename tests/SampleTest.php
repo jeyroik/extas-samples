@@ -216,5 +216,11 @@ class SampleTest extends TestCase
         $this->assertNotEmpty($sample);
         $this->assertEquals('This is test', $sample->getTitle());
         $this->sampleRepo->delete([Sample::FIELD__NAME => 'test']);
+
+        $newSample = new Sample([
+            Sample::FIELD__NAME => 'test2'
+        ]);
+        $hasSample->buildFromSample($newSample);
+        $this->assertEquals('test2', $hasSample->getSampleName());
     }
 }

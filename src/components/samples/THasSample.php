@@ -47,4 +47,17 @@ trait THasSample
 
         return $this;
     }
+
+    /**
+     * @param ISample $sample
+     * @return $this
+     */
+    public function buildFromSample(ISample $sample)
+    {
+        $sampleData = $sample->__toArray();
+        $sampleData[IHasSample::FIELD__SAMPLE_NAME] = $sample->getName();
+        $this->config = $sampleData;
+
+        return $this;
+    }
 }
