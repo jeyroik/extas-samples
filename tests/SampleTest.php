@@ -1,4 +1,7 @@
 <?php
+namespace tests;
+
+use extas\components\THasName;
 use PHPUnit\Framework\TestCase;
 use extas\components\samples\Sample;
 use extas\components\Item;
@@ -200,6 +203,7 @@ class SampleTest extends TestCase
     {
         $hasSample = new class () extends Item implements IHasSample {
             use THasSample;
+            use THasName;
 
             protected function getSubjectForExtension(): string
             {
@@ -220,7 +224,8 @@ class SampleTest extends TestCase
         $newSample = new Sample([
             Sample::FIELD__NAME => 'test2'
         ]);
-        $hasSample->buildFromSample($newSample);
+        $hasSample->buildFromSample($newSample, 'test_name');
         $this->assertEquals('test2', $hasSample->getSampleName());
+        $this->assertEquals('test_name', $hasSample->getName());
     }
 }

@@ -29,7 +29,8 @@ interface IHasSample
 
     /**
      * @param ISample $sample
+     * @param string $name
      * @return $this
      */
-    public function buildFromSample(ISample $sample);
+    public function buildFromSample(ISample $sample, string $name = '@sample(uuid6)');
 }

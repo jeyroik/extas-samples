@@ -2,6 +2,7 @@
 namespace extas\components\samples;
 
 use extas\components\SystemContainer;
+use extas\interfaces\IHasName;
 use extas\interfaces\samples\IHasSample;
 use extas\interfaces\samples\ISample;
 use extas\interfaces\samples\ISampleRepository;
@@ -50,12 +51,14 @@ trait THasSample
 
     /**
      * @param ISample $sample
+     * @param string $name
      * @return $this
      */
-    public function buildFromSample(ISample $sample)
+    public function buildFromSample(ISample $sample, string $name = '@sample(uuid6)')
     {
         $sampleData = $sample->__toArray();
         $sampleData[IHasSample::FIELD__SAMPLE_NAME] = $sample->getName();
+        $name && ($sampleData[IHasName::FIELD__NAME] = $name);
         $this->config = $sampleData;
 
         return $this;
