@@ -37,7 +37,7 @@ class SampleTest extends TestCase
         $this->sampleRepo = new SampleRepository();
         $this->extRepo = new ExtensionRepository();
         SystemContainer::addItem(
-            ISampleRepository::class,
+            'sampleRepository',
             SampleRepository::class
         );
     }
