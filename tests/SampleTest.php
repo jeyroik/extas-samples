@@ -1,7 +1,10 @@
 <?php
 namespace tests;
 
+use DI\ContainerBuilder;
+use extas\components\samples\SampleService;
 use extas\components\THasName;
+use extas\interfaces\samples\ISampleService;
 use PHPUnit\Framework\TestCase;
 use extas\components\samples\Sample;
 use extas\components\Item;
@@ -13,6 +16,8 @@ use extas\interfaces\samples\ISampleRepository;
 use extas\components\samples\SampleRepository;
 use extas\components\SystemContainer;
 use extas\interfaces\repositories\IRepository;
+use function DI\autowire;
+use function DI\create;
 
 /**
  * Class SampleTest
@@ -216,7 +221,7 @@ class SampleTest extends TestCase
             Sample::FIELD__NAME => 'test',
             Sample::FIELD__TITLE => 'This is test'
         ]));
-        $sample = $hasSample->getSample();
+        $sample = $this->getService()->getSample($hasSample);
         $this->assertNotEmpty($sample);
         $this->assertEquals('This is test', $sample->getTitle());
         $this->sampleRepo->delete([Sample::FIELD__NAME => 'test']);
@@ -227,5 +232,16 @@ class SampleTest extends TestCase
         $hasSample->buildFromSample($newSample, 'test_name');
         $this->assertEquals('test2', $hasSample->getSampleName());
         $this->assertEquals('test_name', $hasSample->getName());
+    }
+
+    protected function getService()
+    {
+        $builder = new ContainerBuilder();
+        $builder->addDefinitions([
+            ISampleService::class => autowire(SampleService::class)
+        ]);
+        $container = $builder->build();
+
+        return $container->get(ISampleService::class);
     }
 }
