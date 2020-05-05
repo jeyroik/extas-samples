@@ -2,8 +2,7 @@
   "name": "jeyroik/extas-samples",
   "description": "Extas samples package",
   "require": {
-    "jeyroik/extas-installer": "2.*",
-    "php-di/php-di": "6.*"
+    "jeyroik/extas-installer": "2.*"
   },
   "require-dev": {
     "phpunit/phpunit": "^9",

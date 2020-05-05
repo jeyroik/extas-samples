@@ -221,7 +221,7 @@ class SampleTest extends TestCase
             Sample::FIELD__NAME => 'test',
             Sample::FIELD__TITLE => 'This is test'
         ]));
-        $sample = $this->getService()->getSample($hasSample);
+        $sample = $hasSample->getSample();
         $this->assertNotEmpty($sample);
         $this->assertEquals('This is test', $sample->getTitle());
         $this->sampleRepo->delete([Sample::FIELD__NAME => 'test']);
@@ -232,13 +232,5 @@ class SampleTest extends TestCase
         $hasSample->buildFromSample($newSample, 'test_name');
         $this->assertEquals('test2', $hasSample->getSampleName());
         $this->assertEquals('test_name', $hasSample->getName());
-    }
-
-    protected function getService()
-    {
-        $builder = new ContainerBuilder();
-        $container = $builder->build();
-
-        return $container->get(SampleService::class);
     }
 }
