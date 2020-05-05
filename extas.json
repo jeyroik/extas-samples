@@ -4,12 +4,24 @@
     {
       "interface": "extas\\interfaces\\samples\\ISampleRepository",
       "class": "extas\\components\\samples\\SampleRepository"
+    },
+    {
+      "interface": "sampleRepository",
+      "class": "extas\\components\\samples\\SampleRepository"
     }
   ],
   "plugins": [
     {
       "class": "extas\\components\\plugins\\PluginInstallSamples",
       "stage": "extas.install"
+    }
+  ],
+  "extensions": [
+    {
+      "class": "extas\\components\\extensions\\ExtensionRepositoryGet",
+      "interface": "extas\\interfaces\\extensions\\IExtensionRepositoryGet",
+      "subject": "*",
+      "methods": ["sampleRepository"]
     }
   ]
 }

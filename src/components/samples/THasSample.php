@@ -1,16 +1,15 @@
 <?php
 namespace extas\components\samples;
 
-use extas\components\SystemContainer;
 use extas\interfaces\IHasName;
 use extas\interfaces\samples\IHasSample;
 use extas\interfaces\samples\ISample;
-use extas\interfaces\samples\ISampleRepository;
 
 /**
  * Trait THasSample
  *
  * @property $config
+ * @method sampleRepository(): ISampleRepository
  *
  * @package extas\components\samples
  * @author jeyroik <jeyroik@gmail.com>
@@ -30,12 +29,7 @@ trait THasSample
      */
     public function getSample(): ?ISample
     {
-        /**
-         * @var $repo ISampleRepository
-         */
-        $repo = SystemContainer::getItem(ISampleRepository::class);
-
-        return $repo->one([ISample::FIELD__NAME => $this->getSampleName()]);
+        return $this->sampleRepository()->one([ISample::FIELD__NAME => $this->getSampleName()]);
     }
 
     /**
