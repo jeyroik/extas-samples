@@ -237,11 +237,8 @@ class SampleTest extends TestCase
     protected function getService()
     {
         $builder = new ContainerBuilder();
-        $builder->addDefinitions([
-            ISampleService::class => autowire(SampleService::class)
-        ]);
         $container = $builder->build();
 
-        return $container->get(ISampleService::class);
+        return $container->get(SampleService::class);
     }
 }
