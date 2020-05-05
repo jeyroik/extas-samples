@@ -1,12 +1,12 @@
 <?php
 namespace tests;
 
-use DI\ContainerBuilder;
-use extas\components\samples\SampleService;
-use extas\components\THasName;
-use extas\interfaces\samples\ISampleService;
-use PHPUnit\Framework\TestCase;
+use extas\components\extensions\Extension;
+use extas\components\extensions\ExtensionRepository;
+use extas\components\extensions\ExtensionRepositoryGet;
+use extas\interfaces\extensions\IExtensionRepositoryGet;
 use extas\components\samples\Sample;
+use extas\components\THasName;
 use extas\components\Item;
 use extas\components\samples\THasSample;
 use extas\interfaces\samples\IHasSample;
@@ -16,8 +16,8 @@ use extas\interfaces\samples\ISampleRepository;
 use extas\components\samples\SampleRepository;
 use extas\components\SystemContainer;
 use extas\interfaces\repositories\IRepository;
-use function DI\autowire;
-use function DI\create;
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class SampleTest
@@ -26,10 +26,8 @@ use function DI\create;
  */
 class SampleTest extends TestCase
 {
-    /**
-     * @var IRepository|null
-     */
-    protected ?IRepository $sampleRepo = null;
+    protected IRepository $sampleRepo;
+    protected IRepository $extRepo;
 
     protected function setUp(): void
     {
@@ -37,10 +35,16 @@ class SampleTest extends TestCase
         $env = \Dotenv\Dotenv::create(getcwd() . '/tests/');
         $env->load();
         $this->sampleRepo = new SampleRepository();
+        $this->extRepo = new ExtensionRepository();
         SystemContainer::addItem(
             ISampleRepository::class,
             SampleRepository::class
         );
+    }
+
+    protected function tearDown(): void
+    {
+        $this->extRepo->delete([Extension::FIELD__CLASS => ExtensionRepositoryGet::class]);
     }
 
     public function testParameters()
@@ -206,6 +210,12 @@ class SampleTest extends TestCase
 
     public function testHasSample()
     {
+        $this->extRepo->create(new Extension([
+            Extension::FIELD__CLASS => ExtensionRepositoryGet::class,
+            Extension::FIELD__INTERFACE => IExtensionRepositoryGet::class,
+            Extension::FIELD__SUBJECT => '*',
+            Extension::FIELD__METHODS => ['sampleRepository']
+        ]));
         $hasSample = new class () extends Item implements IHasSample {
             use THasSample;
             use THasName;
