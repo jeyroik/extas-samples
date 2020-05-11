@@ -17,11 +17,6 @@ interface IHasSample
     public function getSampleName(): string;
 
     /**
-     * @return ISample|null
-     */
-    public function getSample(): ?ISample;
-
-    /**
      * @param string $name
      * @return mixed
      */
