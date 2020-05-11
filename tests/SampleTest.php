@@ -1,6 +1,9 @@
 <?php
 namespace tests;
 
+use Dotenv\Dotenv;
+use PHPUnit\Framework\TestCase;
+
 use extas\components\extensions\Extension;
 use extas\components\extensions\ExtensionRepository;
 use extas\components\extensions\ExtensionRepositoryGet;
@@ -12,12 +15,9 @@ use extas\components\samples\THasSample;
 use extas\interfaces\samples\IHasSample;
 use extas\interfaces\samples\parameters\ISampleParameter;
 use extas\components\samples\parameters\SampleParameter;
-use extas\interfaces\samples\ISampleRepository;
 use extas\components\samples\SampleRepository;
 use extas\components\SystemContainer;
 use extas\interfaces\repositories\IRepository;
-
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class SampleTest
@@ -32,7 +32,7 @@ class SampleTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $env = \Dotenv\Dotenv::create(getcwd() . '/tests/');
+        $env = Dotenv::create(getcwd() . '/tests/');
         $env->load();
         $this->sampleRepo = new SampleRepository();
         $this->extRepo = new ExtensionRepository();
@@ -227,18 +227,8 @@ class SampleTest extends TestCase
         };
         $hasSample->setSampleName('test');
         $this->assertEquals('test', $hasSample->getSampleName());
-        $this->sampleRepo->create(new Sample([
-            Sample::FIELD__NAME => 'test',
-            Sample::FIELD__TITLE => 'This is test'
-        ]));
-        $sample = $hasSample->getSample();
-        $this->assertNotEmpty($sample);
-        $this->assertEquals('This is test', $sample->getTitle());
-        $this->sampleRepo->delete([Sample::FIELD__NAME => 'test']);
 
-        $newSample = new Sample([
-            Sample::FIELD__NAME => 'test2'
-        ]);
+        $newSample = new Sample([Sample::FIELD__NAME => 'test2']);
         $hasSample->buildFromSample($newSample, 'test_name');
         $this->assertEquals('test2', $hasSample->getSampleName());
         $this->assertEquals('test_name', $hasSample->getName());

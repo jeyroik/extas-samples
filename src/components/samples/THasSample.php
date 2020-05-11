@@ -9,7 +9,6 @@ use extas\interfaces\samples\ISample;
  * Trait THasSample
  *
  * @property $config
- * @method sampleRepository(): ISampleRepository
  *
  * @package extas\components\samples
  * @author jeyroik <jeyroik@gmail.com>
@@ -22,14 +21,6 @@ trait THasSample
     public function getSampleName(): string
     {
         return $this->config[IHasSample::FIELD__SAMPLE_NAME] ?? '';
-    }
-
-    /**
-     * @return ISample|null
-     */
-    public function getSample(): ?ISample
-    {
-        return $this->sampleRepository()->one([ISample::FIELD__NAME => $this->getSampleName()]);
     }
 
     /**
