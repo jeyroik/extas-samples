@@ -2,7 +2,7 @@
   "name": "jeyroik/extas-samples",
   "description": "Extas samples package",
   "require": {
-    "jeyroik/extas-installer": "2.*",
+    "jeyroik/extas-installer": "3.*",
     "jeyroik/extas-repositories-get": "0.*"
   },
   "require-dev": {
