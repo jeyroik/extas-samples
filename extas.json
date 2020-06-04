@@ -2,18 +2,14 @@
   "name": "extas/samples",
   "package_classes": [
     {
-      "interface": "extas\\interfaces\\samples\\ISampleRepository",
-      "class": "extas\\components\\samples\\SampleRepository"
-    },
-    {
       "interface": "sampleRepository",
       "class": "extas\\components\\samples\\SampleRepository"
     }
   ],
   "plugins": [
     {
-      "class": "extas\\components\\plugins\\PluginInstallSamples",
-      "stage": "extas.install"
+      "class": "extas\\components\\plugins\\install\\InstallSamples",
+      "stage": "extas.install.section.samples"
     }
   ],
   "extensions": [
