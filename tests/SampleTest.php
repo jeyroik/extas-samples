@@ -2,6 +2,7 @@
 namespace tests;
 
 use Dotenv\Dotenv;
+use extas\components\repositories\TSnuffRepository;
 use PHPUnit\Framework\TestCase;
 
 use extas\components\extensions\Extension;
@@ -26,6 +27,8 @@ use extas\interfaces\repositories\IRepository;
  */
 class SampleTest extends TestCase
 {
+    use TSnuffRepository;
+
     protected IRepository $sampleRepo;
     protected IRepository $extRepo;
 
@@ -36,15 +39,15 @@ class SampleTest extends TestCase
         $env->load();
         $this->sampleRepo = new SampleRepository();
         $this->extRepo = new ExtensionRepository();
-        SystemContainer::addItem(
-            'sampleRepository',
-            SampleRepository::class
-        );
+        $this->registerSnuffRepos([
+            'sampleRepository' => SampleRepository::class,
+            'extensionRepository' => ExtensionRepository::class
+        ]);
     }
 
     protected function tearDown(): void
     {
-        $this->extRepo->delete([Extension::FIELD__CLASS => ExtensionRepositoryGet::class]);
+        $this->unregisterSnuffRepos();
     }
 
     public function testParameters()
