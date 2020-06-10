@@ -3,7 +3,6 @@ namespace extas\components\samples;
 
 use extas\components\Item;
 use extas\components\samples\parameters\THasSampleParameters;
-use extas\components\THasCreatedAt;
 use extas\components\THasDescription;
 use extas\components\THasName;
 use extas\components\THasUpdatedAt;
@@ -20,7 +19,6 @@ class Sample extends Item implements ISample
     use THasName;
     use THasDescription;
     use THasSampleParameters;
-    use THasCreatedAt;
     use THasUpdatedAt;
 
     /**
